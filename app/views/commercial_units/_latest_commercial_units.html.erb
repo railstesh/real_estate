@@ -1,0 +1,17 @@
+<% @commercial_units.each do |commercial_unit| %>
+	<div class="col-3">
+    <%= commercial_thumbnail(commercial_unit) %>
+		<h3 class="h5 mt-3">Owner: <%= commercial_unit.owner %></h3>
+		<h6>Address: <%= commercial_unit.address %><h6>
+		<h6>Shop: <%= commercial_unit.shops %></h6>
+		<h6>Sqmt: <%= commercial_unit.sqmt %></h6>
+		<h6>Parking: <%= commercial_unit.parking %></h6>
+		<h6>Price: <%= commercial_unit.price %></h6>
+    <%if manager_signed_in? && current_manager.role.eql?('user')%>
+      <button class="btn btn-success purchase" table-name="commercial_units" id="commercial_unit_<%=commercial_unit.id%>" value="<%= commercial_unit.id %>">Buy</button>
+    <%else%>
+      <%= link_to "Login To Buy", new_manager_session_path, class: "btn btn-success"%>
+    <%end%>
+	</div>
+<%end%>
+
